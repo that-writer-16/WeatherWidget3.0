@@ -7,7 +7,7 @@ function App() {
 
   const [city, setCity] = useState("Salt Lake City");
   const [forecast, setForecast] = useState(null);
-  let searchTB = document.getElementById("searchTB").value;
+  let currentCity = document.getElementById("currentCity");
 
   const getData = () => {
     const url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${key}&units=imperial`;
@@ -25,6 +25,7 @@ function App() {
     console.log(`${city} searched,`)
     getData();
     console.log({city});
+    currentCity.dangerouslySetInnerHTML(`Current City ${city}`)
   }
 
   return (
@@ -33,9 +34,9 @@ function App() {
         <h1>Weather Widget 3.0</h1>
       </header>
       <div id='search'>
-        <h3>Current City: {city}</h3>
+        <h3 id='currentCity'>Current City: {city}</h3>
         <input id='searchTB' type='search' placeholder='Enter City' value={city}  onChange={e => setCity(e.target.value)}/>
-        <button onClick={() => search(searchTB)}>Search</button>
+        <button onClick={() => search()}>Search</button>
       </div>
       <div id='weather'>
         {
